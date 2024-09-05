@@ -1,23 +1,21 @@
 from detect_net import DetectNet
 from game_logic import Game
+from renderer import Renderer
+from settings import Settings
 
 fn main():
-    # Initialize game settings
-    game = Game()
+    settings = Settings()
 
-    # Initialize detectNet for hand detection using the GPU
+    game = Game()
+    renderer = Renderer(screen_width=settings.screen_width, screen_height=settings.screen_height)
     detect_net = DetectNet(model_path="ssd_mobilenet_v2", input_device="/dev/video0")
 
-    # Start the game loop
     while not game.is_over:
-        # Capture hand detection result
         hand_detected = detect_net.detect_hand()
 
-        # Update game state based on hand movement
         game.update(hand_detected)
 
-        # Render the game
-        game.render()
+        renderer.render_game(bird_y=game.bird_y, score=game.score)
 
     print("Game Over")
 
