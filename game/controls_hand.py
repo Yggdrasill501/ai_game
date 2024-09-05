@@ -38,7 +38,7 @@ def check_right_hand_movement() -> bool:
     return False  # No right hand detected or it was outside the threshold
 
 
-def check_quit(event.pygame.event.Event) -> bool:
+def check_quit(event: pygame.event.Event) -> bool:
     """Check if the user wants to quit the game.
 
     :param event: pygame.event.Event, pygame event to check
