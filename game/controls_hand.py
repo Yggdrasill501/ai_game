@@ -19,16 +19,26 @@ def check_quit(event: pygame.event) -> bool:
         return True
     return False
 
-def check_right_hand_movement() -> bool:
-    """Use detectNet to check for right hand movement.
-
-    :returns: bool, jump.
-    """
-    # Capture the next image from the camera
+def check_right_hand_movement():
+    """Use detectNet to check for right hand movement."""
     img = input.Capture()
 
-    if img is None:  # timeout
-        return False
+    if img is None:
+        print("[ERROR] Timeout waiting for image buffer")
+        return False  # Return false if no image is captured, skip processing
+
+    detections = net.Detect(img)
+
+    for detection in detections:
+        if detection.ClassID == YOUR_HAND_LABEL_ID:  # replace with actual hand class ID
+            hand_x_center = detection.Center[0]
+
+            if hand_x_center > THRESHOLD_X_POSITION:  # set a threshold based on your needs
+                return True
+
+    output.Render(img)
+
+    return False
 
     # Detect objects in the image
     detections = net.Detect(img)
