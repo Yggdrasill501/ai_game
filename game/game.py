@@ -1,11 +1,11 @@
 """Module with game logic."""
 import pygame
 import random
-from bird.bird import Bird
-from pipe.pipe import Pipe
-from button.button import Button
-from settings import *
-import controls_hand as controls # Importing controls module
+from game.bird.bird import Bird
+from game.pipe.pipe import Pipe
+from game.button.button import Button
+from game.settings import *
+import game.controls_hand as controls # Importing controls module
 
 class Game:
     """Game class."""

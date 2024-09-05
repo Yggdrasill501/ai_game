@@ -1,6 +1,6 @@
 """Module conrols for game controls."""
 import pygame
-from button.button import Button
+from game.button.button import Button
 
 def check_quit(event: pygame.event) -> bool:
     """Check if the user wants to quit the game.

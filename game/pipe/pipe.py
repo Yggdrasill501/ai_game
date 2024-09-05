@@ -1,6 +1,6 @@
 """Module with pipe sprite."""
 import pygame
-from settings import PIPE_GAP, SCROLL_SPEED
+from game.settings import PIPE_GAP, SCROLL_SPEED
 
 class Pipe(pygame.sprite.Sprite):
     """Pipe sprite."""

@@ -1,6 +1,6 @@
 """Module with bird sprite."""
 import pygame
-from settings import GAME_OVER, FLYING
+from game.settings import GAME_OVER, FLYING
 
 class Bird(pygame.sprite.Sprite):
     """Sprite brid."""
