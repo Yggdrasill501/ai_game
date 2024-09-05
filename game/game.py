@@ -84,4 +84,4 @@ class Game:
         font = pygame.font.SysFont('Bauhaus 93', 60)
         white = (255, 255, 255)
         score_text = font.render(str(self.score), True, white)
-        self.screen.blit(score_text, (self.settings.SCREEN_WIDTH // 2, 20))
+        self.screen.blit(score_text, (settings.SCREEN_WIDTH // 2, 20))
