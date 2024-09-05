@@ -9,32 +9,25 @@ import game.settings as settings
 def check_right_hand_movement() -> bool:
     """Use detectNet to check for right hand movement and draw bounding box."""
 
-    # Capture the next image from the camera
     img = settings.input.Capture()
     if img is None:  # timeout
         print("[ERROR] Timeout waiting for image buffer")
         return False
 
-    # Detect objects in the image using the detectNet model
     detections = settings.net.Detect(img)
 
-    # Loop through detections to find the right hand (assuming label ID for the hand is known)
     for detection in detections:
         if detection.ClassID == settings.RIGHT_HAND_LABEL_ID:
-            # Draw a bounding box around the detected right hand
             cudaDrawRect(img, (detection.Left, detection.Top, detection.Right, detection.Bottom), color=(0, 0, 255, 100))
 
-            # Use the position of the hand to control the bird
             hand_x_center = detection.Center[0]
 
-            # Assuming you want the bird to jump if the hand is above a certain X threshold
-            if hand_x_center > settings.THRESHOLD_X_POSITION:  # using the threshold from settings
+            if hand_x_center > settings.THRESHOLD_X_POSITION:
                 return True
 
-    # Render the output if necessary (optional)
     settings.output.Render(img)
 
-    return False  # No right hand detected or it was outside the threshold
+    return False
 
 
 def check_quit(event: pygame.event.Event) -> bool:
@@ -50,8 +43,7 @@ def check_quit(event: pygame.event.Event) -> bool:
 
 def check_jump() -> bool:
     """Check if the bird should jump (based on right-hand detection or mouse press)."""
-    return check_right_hand_movement() or pygame.mouse.get_pressed()[0] == 1
-
+    return settings.process_detections
 
 def check_start_flying(event: pygame.event.Event, flying: bool, game_over: bool) -> bool:
     """Check if the game should start flying (detect right hand or mouse click).
