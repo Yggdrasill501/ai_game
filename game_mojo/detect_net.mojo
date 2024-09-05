@@ -21,4 +21,4 @@ struct DetectNet:
             if detection.ClassID == 1:
                 return True  # Hand detected
 
-        return False  # No hand detected
+        return False
