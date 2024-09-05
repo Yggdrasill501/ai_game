@@ -4,15 +4,12 @@ import sys
 from jetson_inference import detectNet
 from jetson_utils import videoSource, videoOutput
 
+input = videoSource("/dev/video0", argv=['--input-width=640', '--input-height=480', '--framerate=30'])
+output = videoOutput()  # Leave empty if no output rendering is required
+
 MODEL_NAME = "ssd-mobilenet-v2"
 THRESHOLD = 0.5
-
 net = detectNet(MODEL_NAME, sys.argv, THRESHOLD)
-
-INPUT_SOURCE = "/dev/video0"
-
-input = videoSource(INPUT_SOURCE, argv=sys.argv)
-output = videoOutput()
 
 RIGHT_HAND_LABEL_ID = 1
 THRESHOLD_X_POSITION = 640

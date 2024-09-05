@@ -24,6 +24,14 @@ class Game:
         self.flying = False
         self.game_over = False
 
+    def check_collisions(self) -> None:
+            """Check if the bird collides with pipes or the ground."""
+            if pygame.sprite.groupcollide(self.bird_group, self.pipe_group, False, False) or self.flappy.rect.top < 0:
+                self.game_over = True
+            if self.flappy.rect.bottom >= 768:
+                self.game_over = True
+                self.flying = False
+
     def run(self):
         running = True
         while running:
