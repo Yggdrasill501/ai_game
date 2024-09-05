@@ -5,28 +5,27 @@ from game.bird.bird import Bird
 from game.pipe.pipe import Pipe
 from game.button.button import Button
 from game.settings import *
-import game.controls_hand as controls # Importing controls module
+import game.controls_hand as controls
 
 class Game:
     """Game class."""
-    def __init__(self) -> None:
-        """Initialize."""
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-        pygame.display.set_caption('Flappy Bird')
-        self.clock = pygame.time.Clock()
-        self.pipe_group = pygame.sprite.Group()
-        self.bird_group = pygame.sprite.Group()
-        self.flappy = Bird(100, SCREEN_HEIGHT // 2)
-        self.bird_group.add(self.flappy)
-        self.button = Button(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT // 2 - 100, BUTTON_IMG)
-        self.ground_scroll = 0
-        self.score = 0
-        self.pass_pipe = False
-        self.last_pipe = pygame.time.get_ticks() - PIPE_FREQUENCY
-        self.flying = False
-        self.game_over = False
+    def __init__(self):
+            self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+            pygame.display.set_caption('Flappy Bird')
+            self.clock = pygame.time.Clock()
+            self.pipe_group = pygame.sprite.Group()
+            self.bird_group = pygame.sprite.Group()
+            self.flappy = Bird(100, SCREEN_HEIGHT // 2)
+            self.bird_group.add(self.flappy)
+            self.button = Button(SCREEN_WIDTH // 2 - 50, SCREEN_HEIGHT // 2 - 100, BUTTON_IMG)
+            self.ground_scroll = 0
+            self.score = 0
+            self.pass_pipe = False
+            self.last_pipe = pygame.time.get_ticks() - PIPE_FREQUENCY
+            self.flying = False
+            self.game_over = False
 
-    def draw_text(self, text: str, font: pygame.font.Font, text_col: tuple, x: int, y:int) -> None:
+    def draw_text(self, text: str, font: pygame.font.Font, text_col: tuple, x: int, y: int) -> None:
         """Draw text.
 
         :param text: str, text to draw.
@@ -71,7 +70,7 @@ class Game:
                 self.flying = False
                 self.reset_game()
 
-            # Handling user input via the controls module
+            # Handling user input via the controls_hand module
             for event in pygame.event.get():
                 if controls.check_quit(event):
                     running = False
@@ -100,7 +99,7 @@ class Game:
             self.ground_scroll = 0
 
     def check_collisions(self) -> None:
-        """Check for collisions."""
+        """Check collisions."""
         global GAME_OVER
         if pygame.sprite.groupcollide(self.bird_group, self.pipe_group, False, False) or self.flappy.rect.top < 0:
             self.game_over = True
@@ -109,7 +108,7 @@ class Game:
             self.flying = False
 
     def display_score(self) -> None:
-        """Display score. """
+        """Display score."""
         if len(self.pipe_group) > 0:
             bird = self.bird_group.sprites()[0]
             first_pipe = self.pipe_group.sprites()[0]
