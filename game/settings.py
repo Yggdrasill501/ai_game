@@ -1,5 +1,23 @@
 """Settings for the game Flappy Bird"""
 import pygame
+import sys
+from jetson_inference import detectNet
+from jetson_utils import videoSource, videoOutput
+
+# Object detection model configuration
+MODEL_NAME = "ssd-mobilenet-v2"
+THRESHOLD = 0.5
+
+# Initialize detectNet with the specified model
+net = detectNet(MODEL_NAME, sys.argv, THRESHOLD)
+
+# Initialize video source and output
+input = videoSource("/dev/video0", argv=sys.argv)
+output = videoOutput()
+
+# Other configuration variables...
+RIGHT_HAND_LABEL_ID = 1  # Example for COCO "person"
+THRESHOLD_X_POSITION = 640
 
 # Screen settings
 SCREEN_WIDTH = 864
