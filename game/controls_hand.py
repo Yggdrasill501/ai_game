@@ -1,5 +1,5 @@
 """This module contains functions to control the game using hand gestures."""
-from game.button import Button
+from game.button.button import Button
 import pygame
 import sys
 import jetson_utils
