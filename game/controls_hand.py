@@ -40,8 +40,7 @@ def check_quit(event: pygame.event.Event) -> bool:
         return True
     return False
 
-
-def check_jump() -> bool:
+def check_jump():
     """Check if the bird should jump (based on right-hand detection or mouse press)."""
     return settings.process_detections
 
