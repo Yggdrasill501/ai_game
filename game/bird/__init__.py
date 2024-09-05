@@ -1,0 +1,1 @@
+"""Package with sprite bird"""
