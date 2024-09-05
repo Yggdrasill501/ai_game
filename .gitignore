@@ -9,3 +9,10 @@ logs/
 *.pem
 .venv/
 __pycache__/
+*.so
+*.deb
+data
+logs
+test/data
+runner
+*.minus-github-api
