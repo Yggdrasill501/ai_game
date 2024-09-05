@@ -11,7 +11,6 @@ def check_right_hand_movement() -> bool:
 
     # Capture the next image from the camera
     img = settings.input.Capture()
-
     if img is None:  # timeout
         print("[ERROR] Timeout waiting for image buffer")
         return False
