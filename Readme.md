@@ -16,13 +16,6 @@ To run this project, you need the following:
   - NVIDIA Jetson Inference libraries
   - GStreamer 1.20.3 or higher
 
-### Required Python Packages
-
-Make sure you have the following Python packages installed:
-```bash
-pip3 install pygame
-```
-
 ### Jetson Libraries Setup
 
 Ensure that the Jetson Inference library is properly installed. Follow the instructions from the official NVIDIA repository:
