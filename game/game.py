@@ -39,6 +39,9 @@ class Game:
             self.clock.tick(settings.FPS)
             self.screen.blit(settings.BG, (0, 0))
 
+            # Render PoseNet output
+            settings.render_output()
+
             self.pipe_group.draw(self.screen)
             self.bird_group.draw(self.screen)
             self.bird_group.update()
@@ -58,7 +61,7 @@ class Game:
                 self.flying = False
                 self.reset_game()
 
-            # Handling user input
+            # Handling user input via PoseNet or mouse
             for event in pygame.event.get():
                 if controls.check_quit(event):
                     running = False
