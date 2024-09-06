@@ -2,7 +2,7 @@
 import pygame
 import sys
 import argparse
-from jetson_inference import detectNet
+from jetson_inference import poseNet
 from jetson_utils import videoSource, videoOutput, Log
 
 # Create video sources and outputs
