@@ -1,19 +1,32 @@
 """Settings for the game Flappy Bird"""
 import pygame
 import sys
+import argparse
 from jetson_inference import detectNet
-from jetson_utils import videoSource, videoOutput
+from jetson_utils import videoSource, videoOutput, Log
 
-input = videoSource("/dev/video0", argv=[
-    '--input-width=640',
-    '--input-height=480',
-    '--framerate=30'
-])
-output = videoOutput()  # Leave empty if no output rendering is required
+# Parse the command line arguments
+parser = argparse.ArgumentParser(description="Locate objects in a live camera stream using an object detection DNN.",
+                                 formatter_class=argparse.RawTextHelpFormatter,
+                                 epilog=detectNet.Usage() + videoSource.Usage() + videoOutput.Usage() + Log.Usage())
 
-MODEL_NAME = "ssd-mobilenet-v2"
-THRESHOLD = 0.5
-net = detectNet(MODEL_NAME, sys.argv, THRESHOLD)
+parser.add_argument("input", type=str, default="/dev/video0", nargs='?', help="URI of the input stream (default is /dev/video0)")
+parser.add_argument("output", type=str, default="display://0", nargs='?', help="URI of the output stream (default is display://0)")
+parser.add_argument("--network", type=str, default="ssd-mobilenet-v2", help="pre-trained model to load (default is ssd-mobilenet-v2)")
+parser.add_argument("--overlay", type=str, default="box,labels,conf", help="detection overlay flags (e.g., 'box,labels,conf')")
+parser.add_argument("--threshold", type=float, default=0.5, help="minimum detection threshold to use")
+
+try:
+    args = parser.parse_known_args()[0]
+except:
+    print("")
+    parser.print_help()
+    sys.exit(0)
+
+input = videoSource(args.input, argv=sys.argv)
+output = videoOutput(args.output, argv=sys.argv)
+
+net = detectNet(args.network, sys.argv, args.threshold)
 
 RIGHT_HAND_LABEL_ID = 1
 THRESHOLD_X_POSITION = 640

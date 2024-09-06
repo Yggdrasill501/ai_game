@@ -5,7 +5,7 @@ import game.settings as settings
 
 
 def capture_camera_frames() -> None:
-    """Capture camera frames."""
+    """Capture camera frames and run object detection."""
     while True:
         img = settings.input.Capture()
 
