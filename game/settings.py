@@ -63,8 +63,8 @@ def check_right_hand_movement():
     return False  # No wrist detected
 
 # Render the output (this can be called in the game loop to render the video)
-def render_output():
-    output.Render(input.Capture())
+# def render_output():
+#    output.Render(input.Capture())
 
 
 SCREEN_WIDTH = 864

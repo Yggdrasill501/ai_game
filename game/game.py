@@ -40,7 +40,7 @@ class Game:
             self.screen.blit(settings.BG, (0, 0))
 
             # Render PoseNet output
-            settings.render_output()
+            ## settings.render_output()
 
             self.pipe_group.draw(self.screen)
             self.bird_group.draw(self.screen)
